@@ -1,5 +1,5 @@
 
-## WeRaise Crowdfunding Platform - Frontend
+## WeRaise Crowdfunding Platform - Backend
 
 This repository contains the HTML, CSS, and basic JavaScript files for the frontend interface of the WeRaise crowdfunding platform.
 
