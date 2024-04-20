@@ -1,0 +1,27 @@
+<web-app>
+    <display-name>weraise</display-name>
+    <servlet>
+        <servlet-name>index</servlet-name>
+        <servlet-class>com.main</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>addcampagins</servlet-name>
+        <servlet-class>com.database.Campaigns</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addcampagins</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>addUsers</servlet-name>
+        <servlet-class>com.database.Register</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addUsers</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+</web-app>
