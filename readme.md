@@ -1,49 +1,57 @@
+Here's an updated README page reflecting the changes for the backend development:
 
-## WeRaise Crowdfunding Platform - Backend
+---
 
-This repository contains the HTML, CSS, and basic JavaScript files for the frontend interface of the WeRaise crowdfunding platform.
+# WeRaise Crowdfunding Platform - Backend
 
-**Features**
+This repository contains the backend codebase for the WeRaise crowdfunding platform.
 
-* Clean, user-friendly design emphasizing easy navigation and project discovery.
-* Responsive structure adaptable to desktops, tablets, and smartphones.
-* Visually appealing campaign pages with clear visual hierarchy and persuasive calls to action.
-* Interactive elements like image carousels, and forms.
+## Features
 
-**Technologies Used**
+- Dynamically render JSP pages and display data.
+- Implement authentication using OAuth and standard methods.
+- Encrypt passwords for enhanced security.
+- Integration with payment gateways.
+- User profile and dashboard functionality.
 
-* HTML5 for structural markup
-* CSS3 for styling and layout
-* (Optional) JavaScript for basic interactive elements (e.g., form validation, image sliders). 
+## Technologies Used
 
-**Getting Started**
+- Java Servlet for backend development.
+- JSP (JavaServer Pages) for dynamic page rendering.
+- OAuth for authentication.
+- Encryption libraries for password security.
+
+## Getting Started
 
 1. Clone this repository to your local machine.
-2. Open `index.html` in your preferred web browser to view the frontend.
+2. Set up your Java development environment.
+3. Run the project using a servlet container like Apache Tomcat.
+4. Access the backend functionalities through API endpoints.
 
-**Dependencies**
+## Dependencies
 
-*  (List any external CSS libraries or JavaScript frameworks used, such as Bootstrap).
+- Apache Tomcat 10.1.20
+- Postgres JDBC jar file - <a href="https://jdbc.postgresql.org/download/">JDBC JAR File</a>
+- Servlet API
 
-**How to Contribute**
+## How to Contribute
 
-We welcome contributions to enhance the WeRaise frontend. To contribute:
+We welcome contributions to enhance the WeRaise backend. To contribute:
 
 1. Fork this repository.
-2. Create a feature branch (`git checkout -b my-feature`)
-3. Commit your changes (`git commit -m "Added new feature"`)
-4. Push to the branch (`git push origin my-feature`)
+2. Create a feature branch (`git checkout -b my-feature`).
+3. Commit your changes (`git commit -m "Added new feature"`).
+4. Push to the branch (`git push origin my-feature`).
 5. Open a pull request detailing your changes.
 
+## Future Development
 
+- Implement dynamic data fetching and rendering for live campaign information.
+- Enhance integration with payment gateways.
+- Develop user profile and dashboard functionality.
 
-**Future Development**
+## Contact
 
-* Implement dynamic data rendering for fetching live campaign information. 
-* Integrate with payment gateways.
-* User profile and dashboard functionality.
+Project Maintainer: Rahul Parihar [rahulaauji71@gmail.com]
 
-**Contact**
-
-* Project Maintainer: Rahul Parihar [rahulaauji71@gmail.com]
-
+---
