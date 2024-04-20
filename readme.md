@@ -1,7 +1,3 @@
-Here's an updated README page reflecting the changes for the backend development:
-
----
-
 # WeRaise Crowdfunding Platform - Backend
 
 This repository contains the backend codebase for the WeRaise crowdfunding platform.
