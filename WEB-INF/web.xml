@@ -24,4 +24,12 @@
         <servlet-name>addUsers</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>logIn</servlet-name>
+        <servlet-class>com.database.Login</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logIn</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
 </web-app>

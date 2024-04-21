@@ -49,9 +49,9 @@ public class Register extends HttpServlet {
                 st.setString(3, req.getParameter("fname"));
                 st.executeUpdate();
                 st.close();
+                res.sendRedirect("./");
             } catch (SQLException e) {
                 p.println(e);
-                p.println(req.getParameter("fname"));
                 System.out.println(e);
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -61,13 +61,11 @@ public class Register extends HttpServlet {
             if (connection != null) {
                 try {
                     connection.close();
-                    p.println("Connection Closed");
                 } catch (SQLException e) {
                     p.println(e);
                     System.out.println(e);
                 }
             }
-            p.println("<h1>Database Connected Successfully</h1>" + PASSWORD + " " + USER + " " + DB);
         }
     }
 

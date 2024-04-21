@@ -45,35 +45,38 @@
   </nav>
   <h1 align="center">Campaign Details</h1>
     <div class="edits">
-      <form action="" method="post">
-        <div class="form-group required"><label class="form-control-label" for="title">Campaign Title</label>
+      <form action="./add" method="post">
+        <input type="hidden" name="userid" value="4">
+        <div class="form-group">
+          <label class="form-control-label" for="title">Campaign Title</label>
           <input class="form-control" id="title" name="title" required type="text" value="">
         </div>
-        <div class="form-group required"><label class="form-control-label" for="bio">Campaign Tag Line</label>
+        <div class="form-group"><label class="form-control-label" for="bio">Campaign Tag Line</label>
           <input class="form-control" id="bio" name="bio" required type="text" value="">
         </div>
 
-        <div class="form-group required"><label class="form-control-label" for="img">Campaign Image</label>
-          <input class="form-control" id="img" name="img" required type="url" value="">
+        <div class="form-group"><label class="form-control-label" for="img">Campaign Image</label>
+          <input class="form-control" id="img" name="imgurl" required type="url" value="">
         </div>
-        <div class="form-group required"><label class="form-control-label" for="vid">Video URL</label>
-          <input class="form-control" id="vid" name="vid" required type="url" value="">
+        <div class="form-group"><label class="form-control-label" for="vid">Video URL</label>
+          <input class="form-control" id="vid" name="yturl" required type="url" value="">
         </div>
-        <div class="form-group required"><label class="form-control-label" for="story">Story behind raising
+        <div class="form-group"><label class="form-control-label" for="story">Story behind raising
             amount</label>
           <textarea class="form-control" id="story" name="story" required></textarea>
         </div>
-        <div class="form-group"><label class="form-control-label" for="category">Select Category</label>
+        <div class="form-group">
+          <label class="form-control-label" for="category">Select Category</label>
           <select class="form-control" id="category" name="category">
             <option value="Tech and Innovation">Tech and Innovation</option>
             <option value="Creative Works">Creative Works</option>
             <option value="Community Projects">Community Projects</option>
           </select>
         </div>
-        <div class="form-group required"><label class="form-control-label" for="amount">Amount to be raised</label>
+        <div class="form-group"><label class="form-control-label" for="amount">Amount to be raised</label>
           <input class="form-control" id="amount" name="amount" required type="text" value="">
         </div>
-        <div class="form-group required"><label class="form-control-label" for="end">End Date</label>
+        <div class="form-group"><label class="form-control-label" for="end">End Date</label>
           <input class="form-control" id="end" name="end" required type="date" value="">
         </div>
         <input class="btn btn-primary btn-md" id="submit" name="submit" type="submit" value="Publish">

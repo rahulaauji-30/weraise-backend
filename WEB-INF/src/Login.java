@@ -5,7 +5,7 @@ import java.sql.*;
 import java.io.*;
 import java.util.Properties;
 
-public class Campaigns extends HttpServlet {
+public class Login extends HttpServlet {
     private static String DB;
     private static String USER;
     private static String PASSWORD;
@@ -42,19 +42,20 @@ public class Campaigns extends HttpServlet {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(DB, USER, PASSWORD);
             try {
-                PreparedStatement st = connection.prepareStatement("INSERT INTO campaigns(userid,category,title,yturl,imgurl,story,bio,amount,end_date) VALUES (?,?,?,?,?,?,?,?,?)");
-                st.setInt(1, Integer.parseInt(req.getParameter("userid")));
-                st.setString(2, req.getParameter("category"));
-                st.setString(3, req.getParameter("title"));
-                st.setString(4, req.getParameter("yturl"));
-                st.setString(5, req.getParameter("imgurl"));
-                st.setString(6, req.getParameter("story"));
-                st.setString(7, req.getParameter("bio"));
-                st.setFloat(8, Float.parseFloat(req.getParameter("amount")));
-                st.setDate(9, java.sql.Date.valueOf(req.getParameter("end")));
-                st.executeUpdate();
+                PreparedStatement st = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
+                st.setString(1,req.getParameter("username"));
+                ResultSet rs = st.executeQuery();
+                if(rs.next()){
+                    if(req.getParameter("password").equals(rs.getString("password"))){
+                        res.sendRedirect("./dashboard.html");
+                    }else{
+                        p.println("<h1>Password is wrong</h1>"+req.getParameter("password"));
+                    }
+                }else{
+                    p.println("<h1>No user named "+ req.getParameter("username") +"</h1>");
+                }
                 st.close();
-                res.sendRedirect("./dashboard.html");
+
             } catch (SQLException e) {
                 p.println(e);
                 System.out.println(e);

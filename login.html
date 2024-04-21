@@ -43,7 +43,7 @@
         flex-direction: column;
         gap: 3px;
       }
-      input[type=button]{
+      input[type=submit]{
         background-color: #009C00;
         font-size: 20px;
         font-family: "Bree Serif", serif;
@@ -106,17 +106,17 @@
     <div class="main">
       <h1>Welcome!</h1>
       <p>Your <span style="color: green;">fundraising</span> journey starts from here!</p>
-      <form action="">
+      <form action="./login" method="post">
         
         <div>
           <label for="">E-mail</label>
-          <input type="email" name="Email" placeholder="Enter your email" />
+          <input type="email" name="username" placeholder="Enter your email" />
         </div>
         <div>
           <label for="">Password</label>
           <input type="password" name="password" placeholder="Enter password " />
         </div>
-        <input type="button" value="Log In" />
+        <input type="submit" value="Log In" />
         <span>or continue with</span>
         <div class="icon">
           <div class="i">

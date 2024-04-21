@@ -129,7 +129,7 @@ body{
 .post-detail{
     display: flex;
     gap: 50px;
-    /* margin: 30px auto; */
+    margin: 70px auto;
     padding: 20px;
     height: 430px;
 }
