@@ -1,13 +1,9 @@
-Here's an updated README page reflecting the changes for the backend development:
-
----
-
 # WeRaise Crowdfunding Platform - Backend
 
 This repository contains the backend codebase for the WeRaise crowdfunding platform.
 
 ## Features
-
+This things has to be done
 - Dynamically render JSP pages and display data.
 - Implement authentication using OAuth and standard methods.
 - Encrypt passwords for enhanced security.
