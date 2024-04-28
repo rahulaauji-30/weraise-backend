@@ -1,14 +1,9 @@
 package com.database;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
-import jakarta.servlet.ServletConfig;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.io.*;
-import java.io.InputStream;
 import java.util.Properties;
-import java.io.IOException;
 
 public class Comment extends HttpServlet{
     private static String DB;
@@ -46,12 +41,14 @@ public class Comment extends HttpServlet{
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(DB,USER,PASSWORD);
             try{
-                Statement st = connection.createStatement();
-                PreparedStatement st = connection.prepareStatement("INSERT INTO users(username,password,name) values (?)");
-                st.setObject(req.getParameter("username"),req.getParameter("password"),req.getParameter("fname"));
+                PreparedStatement st = connection.prepareStatement("INSERT INTO comments(userid,campaignid,comment) values (?,?,?)");
+                st.setInt(1,Integer.parseInt(req.getParameter("userId")));
+                st.setInt(2,Integer.parseInt(req.getParameter("campaignid")));
+                st.setString(3,req.getParameter("comment"));
                 st.executeUpdate();
                 st.close();
-            }catch (SQLException|ClassNotFoundException e){
+                res.sendRedirect("./individual page.html");
+            }catch (SQLException e){
                 p.println(e);
                 System.out.println(e);
             }

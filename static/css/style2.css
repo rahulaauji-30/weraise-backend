@@ -245,12 +245,16 @@ hr{
     text-decoration: underline;
     text-decoration-color: #008000;
 }
-.sub-menu{
-    display: flex;
-    gap: 10px;
-    padding: 25px;
-}
+#comment-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-family: Arial, sans-serif;
 
+}
+.sub-menu textarea{
+    resize: none;
+    padding:2px;
+}
 .ads{
     display: flex;
     flex-direction: column;
@@ -272,4 +276,14 @@ hr{
 }
 .detail-description{
     width: 65%;
+}
+
+.comment{
+display:flex;
+gap:20px;
+
+}
+
+.comment  img{
+    border-radius:50%;
 }

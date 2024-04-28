@@ -1,10 +1,10 @@
-package com.database;
+package com.security;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import java.sql.*;
 import java.io.*;
 import java.util.Properties;
-
+import java.security.NoSuchAlgorithmException;
 public class Login extends HttpServlet {
     private static String DB;
     private static String USER;
@@ -42,11 +42,20 @@ public class Login extends HttpServlet {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(DB, USER, PASSWORD);
             try {
+                MD md = new MD();
+                String password = null;
+                try{
+                   password = md.MD5(req.getParameter("password"));
+                }catch (NoSuchAlgorithmException e){
+                    System.err.println("MD5 algorithm not found.");
+                }
                 PreparedStatement st = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
                 st.setString(1,req.getParameter("username"));
                 ResultSet rs = st.executeQuery();
                 if(rs.next()){
-                    if(req.getParameter("password").equals(rs.getString("password"))){
+                    if(password.equals(rs.getString("password"))){
+                        HttpSession session = req.getSession();
+                        session.setAttribute("username",req.getParameter("username"));
                         res.sendRedirect("./dashboard.html");
                     }else{
                         p.println("<h1>Password is wrong</h1>"+req.getParameter("password"));

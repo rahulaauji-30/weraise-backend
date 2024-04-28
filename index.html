@@ -19,7 +19,7 @@
                 <a href="./">Weraise</a>
             </div>
                 <form action="search.html">
-                    <input type="text" name="search" id=""/>
+                    <input type="text" name="search"/>
                     <button><img src="static/icons/search.png" alt="" srcset=""></button>
                 </form>
                 <ul class="subnav">
@@ -30,8 +30,12 @@
                         <a href="about.html">About Us</a>
                     </li>
                     <li>
-                        <a href="create.html" class="btn">Start a campaign</a>
+                        <form action="./authenticate" method="POST">
+                            <input type="hidden" name="value" value="create">
+                            <button type="submit" class="btn">Start a campaign</button>
+                        </form>
                     </li>
+
                     <li>
                         <a href="login.html" class="btn">Log In</a>
                     </li>
@@ -52,7 +56,7 @@
         </div>
         <div class="texts">
             <h1>Support Child Rights</h1>
-            <a href="individual page.html">See Campaign</a>
+            <a href="./post/4">See Campaign</a>
         </div>
     </div>
     <div class="postss">

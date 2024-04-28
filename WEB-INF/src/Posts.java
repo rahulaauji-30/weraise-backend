@@ -1,13 +1,9 @@
-package com.database;
-
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
-import java.sql.*;
 import java.io.*;
+import java.sql.*;
 import java.util.Properties;
-import com.security.MD;
-
-public class Register extends HttpServlet {
+public class Posts extends HttpServlet{
     private static String DB;
     private static String USER;
     private static String PASSWORD;
@@ -36,43 +32,42 @@ public class Register extends HttpServlet {
         USER = properties.getProperty("db.user");
         PASSWORD = properties.getProperty("db.password");
     }
-    public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-        Connection connection = null;
-        PrintWriter p = res.getWriter();
-        MD md = new MD();
-        String password = null;
-        try {
+    public void doGet(HttpServletRequest req,HttpServletResponse res) throws IOException, ServletException{
+        String pid = req.getPathInfo().substring(1);
+        PrintWriter out = res.getWriter();
+        Connection conn = null;
+        try{
             Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(DB, USER, PASSWORD);
-            password = md.MD5(req.getParameter("password"));
-            try {
-                PreparedStatement st = connection.prepareStatement("INSERT INTO users(username, password, name) VALUES (?, ?, ?)");
-                st.setString(1, req.getParameter("username"));
-                st.setString(2, password);
-                st.setString(3, req.getParameter("fname"));
-                st.executeUpdate();
+            conn = DriverManager.getConnection(DB,USER,PASSWORD);
+            PreparedStatement st = null;
+            try{
+                st = conn.prepareStatement("SELECT * from campaigns where id = ?");
+                st.setInt(1,Integer.parseInt(pid));
+                ResultSet rs = st.executeQuery();
+                while(rs.next()){
+                    out.println("Id: "+pid);
+                    out.println("Id: "+rs.getInt("id"));
+                    out.println("User Id: "+rs.getInt("userid"));
+                    out.println("Title: "+rs.getString("title"));
+                    }
+                rs.close();
                 st.close();
-                res.sendRedirect("./");
-            } catch (SQLException e) {
-                p.println(e);
-                System.out.println(e);
+                res.sendRedirect("./individual page.html");
+            }catch (SQLException e){
+                out.println(e);
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            p.println(e);
-            System.out.println(e);
-        } finally {
-            if (connection != null) {
+        }catch (SQLException | ClassNotFoundException e) {
+            out.println(e);
+        }finally {
+            out.println("Hello "+pid);
+            if (conn != null) {
                 try {
-                    connection.close();
+                    conn.close();
                 } catch (SQLException e) {
-                    p.println(e);
+                    out.println(e);
                     System.out.println(e);
                 }
             }
         }
-    }
-
-    public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-        doGet(req, res);
     }
 }

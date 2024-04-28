@@ -1,11 +1,11 @@
-package com.database;
+package com.security;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import java.sql.*;
 import java.io.*;
 import java.util.Properties;
-import com.security.MD;
+import java.security.NoSuchAlgorithmException;
 
 public class Register extends HttpServlet {
     private static String DB;
@@ -44,7 +44,12 @@ public class Register extends HttpServlet {
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(DB, USER, PASSWORD);
-            password = md.MD5(req.getParameter("password"));
+            try {
+                    password = md.MD5(req.getParameter("password"));
+                } catch (NoSuchAlgorithmException e) {
+                    System.err.println("MD5 algorithm not found.");
+                }
+
             try {
                 PreparedStatement st = connection.prepareStatement("INSERT INTO users(username, password, name) VALUES (?, ?, ?)");
                 st.setString(1, req.getParameter("username"));
@@ -52,6 +57,8 @@ public class Register extends HttpServlet {
                 st.setString(3, req.getParameter("fname"));
                 st.executeUpdate();
                 st.close();
+                HttpSession session = req.getSession();
+                session.setAttribute("username",req.getParameter("username"));
                 res.sendRedirect("./");
             } catch (SQLException e) {
                 p.println(e);
