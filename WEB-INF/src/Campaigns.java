@@ -54,7 +54,7 @@ public class Campaigns extends HttpServlet {
                 st.setDate(9, java.sql.Date.valueOf(req.getParameter("end")));
                 st.executeUpdate();
                 st.close();
-                res.sendRedirect("./dashboard.jsp");
+                res.sendRedirect("./dashboard");
             } catch (SQLException e) {
                 p.println(e);
                 System.out.println(e);

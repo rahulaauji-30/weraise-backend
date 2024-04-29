@@ -6,7 +6,6 @@
 <%@ page import="java.time.Period" %>
 <%@ page import="java.time.temporal.ChronoUnit" %>
     <html>
-
     <head>
       <title>Page</title>
       <link rel="stylesheet" href="static/css/style2.css" />
@@ -26,12 +25,12 @@
     <body>
       <nav>
         <div class="brand-logo">
-          <a href="./">Weraise</a>
+          <a href="./h">Weraise</a>
         </div>
-        <form action="search.html">
-          <input type="text" name="search" id="" />
-          <button><img src="static/icons/search.png" alt="" srcset="" /></button>
-        </form>
+        <form action="./search" method="post" class="search">
+                    <input type="text" name="search"/>
+                    <button type="submit"><img src="static/icons/search.png"></button>
+                </form>
         <ul class="subnav">
           <li>
             <a href="search.html">Campaigns</a>
@@ -45,7 +44,7 @@
           <li>
             <% String username=(String) session.getAttribute("username"); if(username!=null){%>
               <a href="">
-                <img src="static/images/jn1ofic3tc03wf0imsaoldejaado.jpeg"
+                <img src="static/images/profile.png"
                   style="border-radius: 50%;border: 2px solid lightgray;width50px;height:50px;" width="50px"
                   height="50px" srcset="">
               </a>
@@ -61,10 +60,9 @@
           if(campaigns!=null){
           for(Campaign campaign:campaigns){
             if(campaign.getId() == (Integer) request.getAttribute("cid")){%>
-            <div class="post-detail">
-            <div class="post-preview">
-              <video width="100%" height="100%" controls src="static/videos/Just a Kid   UNICEF.mp4"
-                poster="static/images/y4udqAY2Bqc-HD.jpg"></video>
+            <div class="post-detail" style="justify-content:center;">
+            <div class="post-preview" style="margin-top:50px;">
+              <iframe width="560" height="315" src="<%= campaign.getYturl()%>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
             <div class="post-description">
               <span>Fundig</span>
@@ -76,7 +74,7 @@
                 <%if(users != null){
                     for(User user:users){
                         if(campaign.getUserId() == user.getId()){%>
-                        <img src="static/images/UNICEF_Logo_(cropped).png" alt="" width="70px" height="70px" />
+                        <img src="<%=campaign.getImgurl()%>" alt="" width="70px" height="70px" />
                         <div class="texted-detail">
                           <b><%=user.getName()%></b>
                           <span><%=user.getLocation()%></span>
@@ -97,12 +95,16 @@
                 float pamnt = (ramnt/amnt)*100;
               %>
               <div class="raise-detail">
-                <span>49% of $<%=amnt%></span>
+                <span><%=pamnt%>% of $<%=amnt%></span>
                 <span>10 Days left</span>
               </div>
               <div class="end-description">
-                <form method="post" action="./donate">
+                <form method="post" action="./donate.jsp">
                 <input type="hidden" name="pid" value="<%=campaign.getId()%>">
+                <input type="hidden" name="title" value="<%=campaign.getTitle()%>">
+                <input type="hidden" name="bio" value="<%=campaign.getBio()%>">
+                <input type="hidden" name="story" value="<%=campaign.getStory()%>">
+                <input type="hidden" name="yturl" value="<%=campaign.getYturl()%>">
                 <input type="submit" id="donate"value="Donate">
                 </form>
                 <div class="icons">
@@ -142,10 +144,10 @@
             }%>
             <div class="ads">
               <div class="ad1">
-                <img src="static/images/jn1ofic3tc03wf0imsaoldejaado.jpeg" alt="" />
+                <img src="static/images/fold5_ooh_iris_x_samsung-1.webp" alt="" />
               </div>
               <div class="ad1">
-                <img src="static/images/jn1ofic3tc03wf0imsaoldejaado.jpeg" alt="" />
+                <img src="static/images/greatestprintads_cocacola.jpg" alt="" />
               </div>
             </div>
             </div>
@@ -156,7 +158,7 @@
                 for(Campaign campaign:campaigns){
                     if(campaign.getId() != (Integer) request.getAttribute("cid")){%>
                         <div class="post">
-                        <img src="static/images/Gemini_Generated_Image (1).jpeg" alt="">
+                        <img src="<%=campaign.getImgurl()%>" alt="">
                         <div class="post-texts">
                             <span>Funding</span>
                             <h3><%=campaign.getTitle()%></h3>

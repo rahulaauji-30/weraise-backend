@@ -1,4 +1,4 @@
-package security;
+package database;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -6,8 +6,10 @@ import java.sql.*;
 import java.io.*;
 import java.util.Properties;
 import java.security.NoSuchAlgorithmException;
+import database.Campaign;
+import java.util.*;
 
-public class Register extends HttpServlet {
+public class Dashboard extends HttpServlet {
     private static String DB;
     private static String USER;
     private static String PASSWORD;
@@ -39,33 +41,34 @@ public class Register extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         Connection connection = null;
         PrintWriter p = res.getWriter();
-        MD md = new MD();
-        String password = null;
+        List<Campaign> campaigns = new ArrayList<>();
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(DB, USER, PASSWORD);
+
             try {
-                    password = md.MD5(req.getParameter("password"));
-                } catch (NoSuchAlgorithmException e) {
-                    System.err.println("MD5 algorithm not found.");
-                }
-            PreparedStatement st = null;
-            try {
-                HttpSession session = req.getSession();
-                st = connection.prepareStatement("INSERT INTO users(username, password, name) VALUES (?, ?, ?)");
-                st.setString(1, req.getParameter("username"));
-                st.setString(2, password);
-                st.setString(3, req.getParameter("fname"));
-                st.executeUpdate();
-                st.close();
-                st = connection.prepareStatement("SELECT id from users where username = ?");
-                st.setString(1,req.getParameter("username"));
+                PreparedStatement st = connection.prepareStatement("SELECT * from campaigns");
                 ResultSet rs = st.executeQuery();
-                if (rs.next()){
-                    session.setAttribute("id",rs.getInt("id"));
+                while (rs.next()){
+                    Campaign cm = new Campaign();
+                    cm.setId(rs.getInt("id"));
+                    cm.setUserId(rs.getInt("userid"));
+                    cm.setCategory(rs.getString("category"));
+                    cm.setTitle(rs.getString("title"));
+                    cm.setYturl(rs.getString("yturl"));
+                    cm.setImgurl(rs.getString("imgurl"));
+                    cm.setStory(rs.getString("story"));
+                    cm.setBio(rs.getString("bio"));
+                    cm.setAmount(rs.getInt("amount"));
+                    cm.setAmountRaised(rs.getInt("amountraised"));
+                    cm.setStartDate(rs.getDate("start_date"));
+                    cm.setEndDate(rs.getDate("end_date"));
+                    campaigns.add(cm);
                 }
-                session.setAttribute("username",req.getParameter("username"));
-                res.sendRedirect("./");
+                st.close();
+                System.out.println(campaigns);
+                req.setAttribute("campaigns",campaigns);
+                req.getRequestDispatcher("./dashboard").forward(req,res);
             } catch (SQLException e) {
                 p.println(e);
                 System.out.println(e);
@@ -83,9 +86,5 @@ public class Register extends HttpServlet {
                 }
             }
         }
-    }
-
-    public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-        doGet(req, res);
     }
 }

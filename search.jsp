@@ -1,3 +1,6 @@
+<%@ page import="database.Campaign"%>
+<%@ page import="java.util.*"%>
+
 <html>
   <head>
     <title>Search</title>
@@ -67,153 +70,46 @@
         </li>
       </ul>
     </nav>
-    <div class="titles">
-      <img
-        src="static/images/hands-5216585_1920.jpg"
-        width="100%"
-        height="100%"
-        alt=""
-        srcset=""
-      />
-      <div class="title">
-        <h1>Community Projects</h1>
-        <p>Build a better Community</p>
-      </div>
-    </div>
-    <div class="sidebar">
-      <div class="fliters">
-        <span>Filter Results</span>
-        <div class="category">
-          <span>Category</span>
-          <div class="cate">
-            <span>Community Projects</span>
-            <svg
-              width="15"
-              height="10"
-              viewBox="0 0 15 10"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13.75 0L7.5 7.14286L1.25 0L0 1.42857L7.5 10L15 1.42857L13.75 0Z"
-                fill="#008000"
-              />
-            </svg>
-          </div>
-          <div class="cate">
-            <span>Creative Works</span>
-            <svg
-              width="15"
-              height="10"
-              viewBox="0 0 15 10"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13.75 0L7.5 7.14286L1.25 0L0 1.42857L7.5 10L15 1.42857L13.75 0Z"
-                fill="#008000"
-              />
-            </svg>
-          </div>
-          <div class="cate">
-            <span>Tech & Innovation</span>
-            <svg
-              width="15"
-              height="10"
-              viewBox="0 0 15 10"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13.75 0L7.5 7.14286L1.25 0L0 1.42857L7.5 10L15 1.42857L13.75 0Z"
-                fill="#008000"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-      <div class="column"></div>
+
+
       <div class="results">
-        <div class="post">
-            <img src="static/images/Gemini_Generated_Image (1).jpeg" alt="">
-            <div class="post-texts">
-                <span>Funding</span>
-                <h3>Gun Smith Child Care</h3>
-                <p>We are raisng the fund for the children care and wellness.</p>
-                <span>Health Care</span>
-                <div class="progress-bar">
-                    <div class="progress-text">
-                        <span class="amount-raised">$250M</span>
-                        <span class="percent-raised">100%</span>
+      <% List<Campaign> campaigns = (List<Campaign>) request.getAttribute("campaigns");
+        if(campaigns!=null){
+            for(Campaign campaign:campaigns){%>
+             <div class="post">
+                <img src="static/images/Gemini_Generated_Image (1).jpeg" alt="">
+                <div class="post-texts">
+                    <span>Funding</span>
+                    <h3><%=campaign.getTitle() %></h3>
+                    <p><%=campaign.getBio()%></p>
+                    <span><%= campaign.getCategory()%></span>
+                    <div class="progress-bar">
+                        <div class="progress-text">
+                        <%float ramnt = campaign.getAmountRaised();
+                                float amnt = campaign.getAmount(); // Assuming this is what you meant
+                                float pamnt = (ramnt / amnt)*100;
+                                pamnt = (float) Math.round(pamnt * 10) / 10;
+
+                                float amntr = ramnt; // Declare amntr and initialize with ramnt
+                                amntr = (float) Math.round(amntr * 10) / 10;
+                                %>
+                            <span class="amount-raised">$<%=campaign.getAmountRaised()%></span>
+                            <span class="percent-raised"><%=pamnt%>%</span>
+                        </div>
+                        <input type="range" name="bar" id="" min="0" max="100" value="10">
                     </div>
-                    <input type="range" name="bar" id="" min="0" max="100" value="10">
+                    <div class="read-more" style="text-align: center;margin-top: 10px;">
+                                <form method="post" action="./post">
+                                <input type="hidden" value="<%=campaign.getId()%>" name="id">
+                                <input type="submit" style="background-color:green;width:100%;color:white;border-radius: 5px;padding: 5px;" value="See Campaign" >
+                                </form>
+                           </div>
                 </div>
             </div>
-        </div>
-        <div class="post">
-            <img src="static/images/Gemini_Generated_Image (1).jpeg" alt="">
-            <div class="post-texts">
-                <span>Funding</span>
-                <h3>Gun Smith Child Care</h3>
-                <p>We are raisng the fund for the children care and wellness.</p>
-                <span>Health Care</span>
-                <div class="progress-bar">
-                    <div class="progress-text">
-                        <span class="amount-raised">$250M</span>
-                        <span class="percent-raised">100%</span>
-                    </div>
-                    <input type="range" name="bar" id="" min="0" max="100" value="10">
-                </div>
-            </div>
-        </div>
-        <div class="post">
-            <img src="static/images/Gemini_Generated_Image (1).jpeg" alt="">
-            <div class="post-texts">
-                <span>Funding</span>
-                <h3>Gun Smith Child Care</h3>
-                <p>We are raisng the fund for the children care and wellness.</p>
-                <span>Health Care</span>
-                <div class="progress-bar">
-                    <div class="progress-text">
-                        <span class="amount-raised">$250M</span>
-                        <span class="percent-raised">100%</span>
-                    </div>
-                    <input type="range" name="bar" id="" min="0" max="100" value="10">
-                </div>
-            </div>
-        </div>
-        <div class="post">
-            <img src="static/images/Gemini_Generated_Image (1).jpeg" alt="">
-            <div class="post-texts">
-                <span>Funding</span>
-                <h3>Gun Smith Child Care</h3>
-                <p>We are raisng the fund for the children care and wellness.</p>
-                <span>Health Care</span>
-                <div class="progress-bar">
-                    <div class="progress-text">
-                        <span class="amount-raised">$250M</span>
-                        <span class="percent-raised">100%</span>
-                    </div>
-                    <input type="range" name="bar" id="" min="0" max="100" value="10">
-                </div>
-            </div>
-        </div>
-        <div class="post">
-            <img src="static/images/Gemini_Generated_Image (1).jpeg" alt="">
-            <div class="post-texts">
-                <span>Funding</span>
-                <h3>Gun Smith Child Care</h3>
-                <p>We are raisng the fund for the children care and wellness.</p>
-                <span>Health Care</span>
-                <div class="progress-bar">
-                    <div class="progress-text">
-                        <span class="amount-raised">$250M</span>
-                        <span class="percent-raised">100%</span>
-                    </div>
-                    <input type="range" name="bar" id="" min="0" max="100" value="10">
-                </div>
-            </div>
-        </div>
+        <%}
+        }else{%>
+            <h1>No result found!</h1>
+         <%}%>
       </div>
     </div>
   </body>

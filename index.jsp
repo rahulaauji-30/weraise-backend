@@ -18,15 +18,15 @@
     <div class="carousel">
         <nav>
             <div class="brand-logo">
-                <a href="./">Weraise</a>
+                <a href="./h">Weraise</a>
             </div>
-                <form action="search.html" class="search">
+                <form action="./search" method="post" class="search">
                     <input type="text" name="search"/>
-                    <button><img src="static/icons/search.png" alt="" srcset=""></button>
+                    <button type="submit"><img src="static/icons/search.png"></button>
                 </form>
                 <ul class="subnav">
                     <li>
-                        <a href="search.jsp">Campaigns</a>
+                        <a href="./h">Campaigns</a>
                     </li>
                     <li>
                         <a href="about.html">About Us</a>
@@ -44,7 +44,7 @@
                         <% String username = (String) session.getAttribute("username");
                             if(username!=null){%>
                                 <a href="">
-                                  <img src="static/images/jn1ofic3tc03wf0imsaoldejaado.jpeg"
+                                  <img src="static/images/profile.png"
                                     style="border-radius: 50%;border: 2px solid lightgray;width50px;height:50px;" width="50px" height="50px" srcset="">
                                 </a>
                             <%}else{%>
@@ -79,7 +79,7 @@
             if(campaigns!=null){
                 for(Campaign campaign:campaigns){%>
                     <div class="post">
-                        <img src="static/images/Gemini_Generated_Image (1).jpeg" alt="">
+                        <img src="<%=campaign.getImgurl()%>" alt="">
                         <div class="post-texts">
                             <span>Funding</span>
                             <h3><%=campaign.getTitle()%></h3>
@@ -87,15 +87,20 @@
                             <span><%=campaign.getCategory()%></span>
                             <div class="progress-bar">
                                 <div class="progress-text">
-                                    <span class="amount-raised">$<%=campaign.getAmountRaised()%></span>
-                                    <%
-                                        float amnt = campaign.getAmount();
-                                        float ramnt = campaign.getAmountRaised();
-                                        float pamnt = (ramnt / amnt)*100;
-                                    %>
+                                <%float ramnt = campaign.getAmountRaised();
+                                float amnt = campaign.getAmount(); // Assuming this is what you meant
+                                float pamnt = (ramnt / amnt)*100;
+                                pamnt = (float) Math.round(pamnt * 10) / 10;
+
+                                float amntr = ramnt; // Declare amntr and initialize with ramnt
+                                amntr = (float) Math.round(amntr * 10) / 10;
+                                %>
+
+                                    <span class="amount-raised">$<%=amntr%></span>
+
                                     <span class="percent-raised"><%= pamnt %>%</span>
                                 </div>
-                                <input type="range" name="bar" id="" min="0" max="100" value="<%=pamnt%>">
+                                <input type="range" name="bar" id="mySlider" min="0" max="100" value="<%=pamnt%>">
                             </div>
                             <div class="read-more" style="text-align: center;margin-top: 10px;">
                                 <form method="post" action="./post">

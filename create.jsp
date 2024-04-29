@@ -1,3 +1,5 @@
+<%@ page import="jakarta.servlet.http.HttpServletResponse" %>
+
 <html>
 
 <head>
@@ -27,19 +29,19 @@
     </form>
     <ul class="subnav">
       <li>
-        <a href="search.html">Campaigns</a>
+        <a href="./h">Campaigns</a>
       </li>
       <li>
         <a href="about.html">About Us</a>
       </li>
       <li>
-        <a href="dashboard.html">Dashboard</a>
+        <a href="dashboard.jsp">Dashboard</a>
       </li>
       <li>
         <% String username = (String) session.getAttribute("username");
                             if(username!=null){%>
                                 <a href="">
-                                  <img src="static/images/jn1ofic3tc03wf0imsaoldejaado.jpeg"
+                                  <img src="static/images/profile.png"
                                     style="border-radius: 50%;border: 2px solid lightgray;width50px;height:50px;" width="50px" height="50px" srcset="">
                                 </a>
                             <%}else{%>
@@ -50,8 +52,12 @@
   </nav>
   <h1 align="center">Campaign Details</h1>
     <div class="edits">
-      <form action="./add" method="post">
-        <input type="hidden" name="userid" value="4">
+      <form action="./addcampaigns" method="post">
+      <% if(session.getAttribute("id")!=null){%>
+        <input type="hidden" name="userid" value="<%=session.getAttribute("id")%>">
+      <%}else{
+        response.sendRedirect("./login.html");
+        }%>
         <div class="form-group">
           <label class="form-control-label" for="title">Campaign Title</label>
           <input class="form-control" id="title" name="title" required type="text" value="">

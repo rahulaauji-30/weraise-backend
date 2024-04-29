@@ -55,8 +55,9 @@ public class Login extends HttpServlet {
                 if(rs.next()){
                     if(password.equals(rs.getString("password"))){
                         HttpSession session = req.getSession();
+                        session.setAttribute("id",rs.getInt("id"));
                         session.setAttribute("username",req.getParameter("username"));
-                        res.sendRedirect("./dashboard.jsp");
+                        res.sendRedirect("./dashboard");
                     }else{
                         p.println("<h1>Password is wrong</h1>"+req.getParameter("password"));
                     }

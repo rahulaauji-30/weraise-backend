@@ -1,4 +1,4 @@
-package security;
+package database;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.Properties;
 import java.security.NoSuchAlgorithmException;
 
-public class Register extends HttpServlet {
+public class Delete extends HttpServlet {
     private static String DB;
     private static String USER;
     private static String PASSWORD;
@@ -39,33 +39,16 @@ public class Register extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         Connection connection = null;
         PrintWriter p = res.getWriter();
-        MD md = new MD();
-        String password = null;
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(DB, USER, PASSWORD);
+
             try {
-                    password = md.MD5(req.getParameter("password"));
-                } catch (NoSuchAlgorithmException e) {
-                    System.err.println("MD5 algorithm not found.");
-                }
-            PreparedStatement st = null;
-            try {
-                HttpSession session = req.getSession();
-                st = connection.prepareStatement("INSERT INTO users(username, password, name) VALUES (?, ?, ?)");
-                st.setString(1, req.getParameter("username"));
-                st.setString(2, password);
-                st.setString(3, req.getParameter("fname"));
+                PreparedStatement st = connection.prepareStatement("DELETE from campaigns where id = ?");
+                st.setInt(1,Integer.parseInt(req.getParameter("id")));
                 st.executeUpdate();
                 st.close();
-                st = connection.prepareStatement("SELECT id from users where username = ?");
-                st.setString(1,req.getParameter("username"));
-                ResultSet rs = st.executeQuery();
-                if (rs.next()){
-                    session.setAttribute("id",rs.getInt("id"));
-                }
-                session.setAttribute("username",req.getParameter("username"));
-                res.sendRedirect("./");
+                req.getRequestDispatcher("./dashboard").forward(req,res);
             } catch (SQLException e) {
                 p.println(e);
                 System.out.println(e);
@@ -84,8 +67,7 @@ public class Register extends HttpServlet {
             }
         }
     }
-
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-        doGet(req, res);
+        doGet(req,res);
     }
 }

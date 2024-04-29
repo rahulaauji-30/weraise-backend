@@ -14,7 +14,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>addcampagins</servlet-name>
-        <url-pattern>/addcapmaigns</url-pattern>
+        <url-pattern>/addcampaigns</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>addUsers</servlet-name>
@@ -63,5 +63,37 @@
     <servlet-mapping>
         <servlet-name>home</servlet-name>
         <url-pattern>/h</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>dashboard</servlet-name>
+        <servlet-class>database.Dashboard</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dashboard</servlet-name>
+        <url-pattern>/dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>delete</servlet-name>
+        <servlet-class>database.Delete</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>delete</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>donate</servlet-name>
+        <servlet-class>database.Donate</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>donate</servlet-name>
+        <url-pattern>/donate</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>search</servlet-name>
+        <servlet-class>database.Search</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>search</servlet-name>
+        <url-pattern>/search</url-pattern>
     </servlet-mapping>
 </web-app>
