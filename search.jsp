@@ -52,10 +52,18 @@
           <a href="about.html">About Us</a>
         </li>
         <li>
-          <a href="create.html" class="btn">Start a campaign</a>
+          <a href="create.jsp" class="btn">Start a campaign</a>
         </li>
         <li>
-          <a href="" class="btn">Log In</a>
+          <% String username = (String) session.getAttribute("username");
+                            if(username!=null){%>
+                                <a href="">
+                                  <img src="static/images/jn1ofic3tc03wf0imsaoldejaado.jpeg"
+                                    style="border-radius: 50%;border: 2px solid lightgray;width50px;height:50px;" width="50px" height="50px" srcset="">
+                                </a>
+                            <%}else{%>
+                                <a href="login.html" class="btn">Log In</a>
+                                <%}%>
         </li>
       </ul>
     </nav>

@@ -14,11 +14,11 @@ public class Authentication extends HttpServlet{
                 if(value!=null){
                     if(value.equals("create")){
                     System.out.println("CRREATE");
-                    res.sendRedirect("./create.html");
+                    res.sendRedirect("./create.jsp");
                 } else if (value.equals("comments")) {
                     res.sendRedirect("./comments");
                 } else if (value.equals("donate")) {
-                        res.sendRedirect("./donate.html");
+                        res.sendRedirect("./donate.jsp");
                     }
                 }else{
                     res.sendRedirect("./");

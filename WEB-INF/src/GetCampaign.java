@@ -8,6 +8,7 @@ import java.util.Properties;
 import java.security.NoSuchAlgorithmException;
 import database.Campaign;
 import java.util.*;
+
 public class GetCampaign extends HttpServlet {
     private static String DB;
     private static String USER;
@@ -67,7 +68,7 @@ public class GetCampaign extends HttpServlet {
                 st.close();
                 System.out.println(campaigns);
                 req.setAttribute("campaigns",campaigns);
-                req.getRequestDispatcher("/sample.jsp").forward(req,res);
+                req.getRequestDispatcher("/index.jsp").forward(req,res);
             } catch (SQLException e) {
                 p.println(e);
                 System.out.println(e);

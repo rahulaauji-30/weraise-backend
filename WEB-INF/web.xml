@@ -50,18 +50,18 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>posts</servlet-name>
-        <servlet-class>Posts</servlet-class>
+        <servlet-class>database.Posts</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>posts</servlet-name>
-        <url-pattern>/post/*</url-pattern>
+        <url-pattern>/post</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>sample</servlet-name>
+        <servlet-name>home</servlet-name>
         <servlet-class>database.GetCampaign</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>sample</servlet-name>
-        <url-pattern>/gc</url-pattern>
+        <servlet-name>home</servlet-name>
+        <url-pattern>/h</url-pattern>
     </servlet-mapping>
 </web-app>

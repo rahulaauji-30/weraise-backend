@@ -20,26 +20,36 @@
             <div class="brand-logo">
                 <a href="./">Weraise</a>
             </div>
-                <form action="search.html">
+                <form action="search.html" class="search">
                     <input type="text" name="search"/>
                     <button><img src="static/icons/search.png" alt="" srcset=""></button>
                 </form>
                 <ul class="subnav">
                     <li>
-                        <a href="search.html">Campaigns</a>
+                        <a href="search.jsp">Campaigns</a>
                     </li>
                     <li>
                         <a href="about.html">About Us</a>
                     </li>
                     <li>
+                        <div class="nav-link">
                         <form action="./authenticate" method="POST">
                             <input type="hidden" name="value" value="create">
                             <button type="submit" class="btn">Start a campaign</button>
                         </form>
+                        </div>
                     </li>
 
                     <li>
-                        <a href="login.html" class="btn">Log In</a>
+                        <% String username = (String) session.getAttribute("username");
+                            if(username!=null){%>
+                                <a href="">
+                                  <img src="static/images/jn1ofic3tc03wf0imsaoldejaado.jpeg"
+                                    style="border-radius: 50%;border: 2px solid lightgray;width50px;height:50px;" width="50px" height="50px" srcset="">
+                                </a>
+                            <%}else{%>
+                                <a href="login.html" class="btn">Log In</a>
+                                <%}%>
                     </li>
                 </ul>
         </nav>
@@ -86,6 +96,12 @@
                                     <span class="percent-raised"><%= pamnt %>%</span>
                                 </div>
                                 <input type="range" name="bar" id="" min="0" max="100" value="<%=pamnt%>">
+                            </div>
+                            <div class="read-more" style="text-align: center;margin-top: 10px;">
+                                <form method="post" action="./post">
+                                <input type="hidden" value="<%=campaign.getId()%>" name="id">
+                                <input type="submit" style="background-color:green;width:100%;color:white;border-radius: 5px;padding: 5px;" value="See Campaign" >
+                                </form>
                             </div>
                         </div>
                     </div>

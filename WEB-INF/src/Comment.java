@@ -47,7 +47,7 @@ public class Comment extends HttpServlet{
                 st.setString(3,req.getParameter("comment"));
                 st.executeUpdate();
                 st.close();
-                res.sendRedirect("./individual page.html");
+                res.sendRedirect("./individual.jsp");
             }catch (SQLException e){
                 p.println(e);
                 System.out.println(e);
